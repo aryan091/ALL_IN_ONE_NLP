@@ -1,18 +1,16 @@
 
-
-
-from flask import Flask, render_template, request,url_for
+from flask import Flask, render_template, request ,url_for
 import pandas
 import glob
 
 # nlp library
 import spacy
 import joblib
-#from spacy.lang.en.stop_words import STOP_WORDS
+# from spacy.lang.en.stop_words import STOP_WORDS
 import string
 
 # summarize
-#from gensim.summarization import summarize
+# from gensim.summarization import summarize
 
 # load the spacy english model
 # nlp = spacy.load('en_core_web_sm')
@@ -39,7 +37,7 @@ def text_process(mess):
 	return [word for word in nopunc.split() if word.lower() not in stopwords.words('english')]
 
 
-#sen_model = joblib.load('models/mymodel2May.pkl')
+# sen_model = joblib.load('models/mymodel2May.pkl')
 
 # model load spam classification
 spam_model = joblib.load('models/mymodel2May.pkl')
@@ -63,7 +61,7 @@ def sentiment_nlp():
 	return render_template('sentiment.html')
 
 
-@app.route('/sentiment',methods = ['POST','GET'])
+@app.route('/sentiment' ,methods = ['POST' ,'GET'])
 def sentiment():
 	if request.method == 'POST':
 		message = request.form['message']
@@ -77,13 +75,14 @@ def sentiment():
 def spam_nlp():
 	return render_template('spam.html')
 
-#spam classification
-@app.route('/spam',methods= ['POST','GET'])
+
+# spam classification
+@app.route('/spam' ,methods= ['POST' ,'GET'])
 def spam():
 	if request.method == 'POST':
 		message = request.form['message']
 		pred = spam_model.predict([message])
-		return render_template('spam.html',prediction=pred)
+		return render_template('spam.html' ,prediction=pred)
 
 
 # summarize
@@ -91,27 +90,29 @@ def spam():
 def summarize_nlp():
 	return render_template('summarize.html')
 
-@app.route('/summarize',methods= ['POST','GET'])
+@app.route('/summarize' ,methods= ['POST' ,'GET'])
 def sum_route():
 	if request.method == 'POST':
 		message = request.form['message']
 		sum_message = summarize(message)
-		return render_template('summarize.html',original = message, prediction=sum_message)
+		return render_template('summarize.html' ,original = message, prediction=sum_message)
 
-#news classifier
+
+# news classifier
 @app.route('/newsclf')
 def news_classifier():
 	return render_template('news.html')
 
-@app.route('/newsclassifier',methods=['POST','GET'])
+@app.route('/newsclassifier' ,methods=['POST' ,'GET'])
 def news_clf():
 	if request.method == 'POST':
 		message = request.form['message']
 
 		pred = n_clf.predict([message])
-		print("pred--",pred)
-		return render_template('news.html',prediction=pred)
+		print("pred--" ,pred)
+		return render_template('news.html' ,prediction=pred)
 
-
+print("Paji Paji")
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=Tru
+e)
